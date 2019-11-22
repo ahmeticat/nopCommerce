@@ -1,0 +1,9 @@
+{
+  "private": true,
+  "scripts": {
+    "install": "npm update"
+  },
+  "dependencies": {
+    "cldr-data": ">=36.0.0"
+  }  
+}

@@ -49,20 +49,15 @@ namespace Nop.Web.Framework.Globalization
             var adminAreaUrl = $"{webHelper.GetStoreLocation()}admin";
             if (webHelper.GetThisPageUrl(false).StartsWith(adminAreaUrl, StringComparison.InvariantCultureIgnoreCase))
             {
-                //we set culture of admin area to 'en-US' because current implementation of Telerik grid doesn't work well in other cultures
-                //e.g., editing decimal value in russian culture
-                CommonHelper.SetTelerikCulture();
-
                 //set work context to admin mode
                 workContext.IsAdmin = true;
             }
-            else
-            {
-                //set working language culture
-                var culture = new CultureInfo(workContext.WorkingLanguage.LanguageCulture);
-                CultureInfo.CurrentCulture = culture;
-                CultureInfo.CurrentUICulture = culture;
-            }
+            
+            //set working language culture
+            //var culture = new CultureInfo(workContext.WorkingLanguage.LanguageCulture);
+            var culture = new CultureInfo("ru-RU"); //FOR TESTING
+            CultureInfo.CurrentCulture = culture;
+            CultureInfo.CurrentUICulture = culture;
         }
 
         #endregion
