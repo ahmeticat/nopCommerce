@@ -1,0 +1,20 @@
+﻿@model CategoryNavigationModel
+@if (Model.Categories.Count > 0)
+{
+    <div class="block block-category-navigation card">
+        <div class="card-header">
+            <h4 class="card-title">@T("Categories")</h4>
+        </div>
+        <ul class="listbox list-group list-group-flush">
+            @foreach (var category in Model.Categories)
+            {
+                var categoryLineModel = new CategoryNavigationModel.CategoryLineModel
+                {
+                    CurrentCategoryId = Model.CurrentCategoryId,
+                    Category = category
+                };
+                @await Html.PartialAsync("_CategoryLine.Navigation", categoryLineModel)
+            }
+        </ul>
+    </div>
+}

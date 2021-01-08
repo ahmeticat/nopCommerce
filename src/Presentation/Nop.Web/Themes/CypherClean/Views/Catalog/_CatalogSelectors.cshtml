@@ -1,0 +1,49 @@
+﻿@model CatalogPagingFilteringModel
+    <div class="product-selectors row">
+        @*sorting*@
+        @if (Model.AllowProductSorting)
+        {
+            <div class="product-sorting col-xs-12 col-sm-4 col-md-4 col-xl-4">
+                <div class="row">
+                    <div class="col-md-4 pr-0">
+                        <span>@T("Catalog.OrderBy")</span>
+                    </div>
+                    <div class="col-md-8">
+                        @Html.DropDownList("products-orderby", Model.AvailableSortOptions, new { @class = "form-control custom-select", onchange = "setLocation(this.value);", aria_label = T("Catalog.OrderBy.Label") })
+                    </div>
+                </div>
+            </div>
+        }
+        @*page size*@
+        @if (Model.AllowCustomersToSelectPageSize)
+        {
+            <div class="product-page-size col-xs-12 col-sm-4 col-md-4 col-xl-4">
+                <div class="row">
+                    <div class="col-md-3 pl-0 pr-0">
+                        <span>@T("Catalog.PageSize")</span>
+                    </div>
+                    <div class="col-md-5">
+                        @Html.DropDownList("products-pagesize", Model.PageSizeOptions, new { @class = "form-control custom-select", onchange = "setLocation(this.value);", aria_label = T("Catalog.PageSize.Label") })
+                    </div>
+                    <div class="col-md-4 pl-0 pr-0">
+                        <span>@T("Catalog.PageSize.PerPage")</span>
+                    </div>
+                </div>
+            </div>
+        }
+        @*view mode*@
+        @if (Model.AllowProductViewModeChanging)
+        {
+            <div class="product-viewmode col-xs-12 col-sm-4 col-md-4 col-xl-4">
+                <span>@T("Catalog.ViewMode")</span>
+                @if (Model.AvailableViewModes.Count > 1)
+                {
+                    var gridMode = Model.AvailableViewModes[0];
+                    var listMode = Model.AvailableViewModes[1];
+
+                    <a class="viewmode-icon grid @if(gridMode.Selected){<text>selected</text>}" href="@gridMode.Value" title="@gridMode.Text"><i class="fa fa-th" aria-hidden="true"></i></a>
+                    <a class="viewmode-icon list @if (listMode.Selected){<text>selected</text>}" href="@listMode.Value" title="@listMode.Text"><i class="fa fa-th-list" aria-hidden="true"></i></a>
+                }
+            </div>
+        }
+    </div>
